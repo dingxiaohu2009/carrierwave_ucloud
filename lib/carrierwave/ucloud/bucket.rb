@@ -57,9 +57,6 @@ module CarrierWave
           req.headers['Authorization'] = authorization(req.method, nil, path)
         end
 
-        Rails.logger.info '-' * 100
-        Rails.logger.info response
-
         if response.success?
           true
         else
@@ -121,9 +118,8 @@ module CarrierWave
         http_verb = "#{http_method.upcase}\n"
         content_md5 = "\n"
         content_type = "#{ori_content_type}\n"
-        timestamp = "#{Time.now.to_i}\n"
+        timestamp = "#{expired_ts}\n"
         full_path = "/#{@ucloud_bucket}/#{path}"
-        Rails.logger.info http_verb + content_md5 + content_type + timestamp + full_path
         http_verb + content_md5 + content_type + timestamp + full_path
       end
     end
