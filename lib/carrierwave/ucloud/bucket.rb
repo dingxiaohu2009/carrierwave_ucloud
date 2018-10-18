@@ -41,7 +41,7 @@ module CarrierWave
       # 读取文件
       def get(path)
         path.sub!(PATH_PREFIX, '')
-        response = conn.get(url(path))
+        response = conn.get(URI.escape url(path))
 
         if response.success?
           return response
@@ -53,7 +53,7 @@ module CarrierWave
       # 删除文件
       def delete(path)
         path.sub!(PATH_PREFIX, '')
-        response = conn.delete(url(path)) do |req|
+        response = conn.delete(URI.escape url(path)) do |req|
           req.headers['Authorization'] = authorization(req.method, nil, path)
         end
 
@@ -66,9 +66,9 @@ module CarrierWave
 
       def url(path)
         if @ucloud_public_read
-          URI.escape public_get_url(path)
+          public_get_url(path)
         else
-          URI.escape private_get_url(path)
+          private_get_url(path)
         end
       end
 
