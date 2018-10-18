@@ -121,7 +121,7 @@ module CarrierWave
         http_verb = "#{http_method.upcase}\n"
         content_md5 = "\n"
         content_type = "#{ori_content_type}\n"
-        timestamp = "\n"
+        timestamp = "#{Time.now.to_i}\n"
         full_path = "/#{@ucloud_bucket}/#{path}"
         Rails.logger.info http_verb + content_md5 + content_type + timestamp + full_path
         http_verb + content_md5 + content_type + timestamp + full_path
