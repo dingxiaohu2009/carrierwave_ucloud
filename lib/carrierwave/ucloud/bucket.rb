@@ -54,8 +54,7 @@ module CarrierWave
       def delete(path)
         path.sub!(PATH_PREFIX, '')
         response = conn.delete(URI.escape url(path)) do |req|
-          req.headers['Authorization'] = "UCloud gx7MwqmDawFJc/nCtylzR6ogkePlI2CbTdMmx5Y5Ut1Qwg6p1EesM6t4sLQ=:xhR7XdndlqBwpJf7zQeqctLBszc="
-              # authorization(req.method, nil, path)
+          req.headers['Authorization'] = authorization(req.method, nil, path)
         end
 
         Rails.logger.info '-' * 100
@@ -122,7 +121,7 @@ module CarrierWave
         http_verb = "#{http_method.upcase}\n"
         content_md5 = "\n"
         content_type = "#{ori_content_type}\n"
-        timestamp = "#{expired_ts}\n"
+        timestamp = "\n"
         full_path = "/#{@ucloud_bucket}/#{path}"
         Rails.logger.info http_verb + content_md5 + content_type + timestamp + full_path
         http_verb + content_md5 + content_type + timestamp + full_path
