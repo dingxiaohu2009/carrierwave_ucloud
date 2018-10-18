@@ -11,21 +11,25 @@ module CarrierWave
       end
 
       def read
-        response = bucket.get(path)
+        response = bucket.get(escaped_path)
         @headers = response.headers.deep_transform_keys { |k| k.underscore.to_sym rescue key }
         response.body
       end
 
       def delete
-        bucket.delete(path)
+        bucket.delete(escaped_path)
       end
 
       def url
         bucket.url(path)
       end
+      
+      def escaped_url
+        @escaped_url ||= URI.escape(url)
+      end
 
       def store(file, headers = {})
-        bucket.put(path, file, headers)
+        bucket.put(escaped_path, file, headers)
       end
 
       def content_type
@@ -39,6 +43,11 @@ module CarrierWave
       def headers
         @headers ||= {}
       end
+
+      def escaped_path
+        @escaped_path ||= URI.escape(path)
+      end
+
     end
   end
 end
