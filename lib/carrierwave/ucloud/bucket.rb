@@ -54,7 +54,7 @@ module CarrierWave
       def delete(path)
         path.sub!(PATH_PREFIX, '')
         response = conn.delete(URI.escape url(path)) do |req|
-          req.headers['Authorization'] = "UCloud gx7MwqmDawFJc/nCtylzR6ogkePlI2CbTdMmx5Y5Ut1Qwg6p1EesM6t4sLQ=:YjDnug+1fufq4hA4AWTddzYc4ZI="
+          req.headers['Authorization'] = "UCloud gx7MwqmDawFJc/nCtylzR6ogkePlI2CbTdMmx5Y5Ut1Qwg6p1EesM6t4sLQ=:xhR7XdndlqBwpJf7zQeqctLBszc="
               # authorization(req.method, nil, path)
         end
 
