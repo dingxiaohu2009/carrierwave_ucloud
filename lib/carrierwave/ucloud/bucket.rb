@@ -25,7 +25,7 @@ module CarrierWave
       def put(path, file, headers = {})
         path.sub!(PATH_PREFIX, '')
 
-        response = conn.put(path, file.read) do |req|
+        response = conn.put(URI.escape(path), file.read) do |req|
           req.headers = headers
           token = authorization(req.method, headers['Content-Type'], path)
           req.headers['Authorization'] = token
@@ -66,9 +66,9 @@ module CarrierWave
 
       def url(path)
         if @ucloud_public_read
-          public_get_url(path)
+          URI.escape public_get_url(path)
         else
-          private_get_url(path)
+          URI.escape private_get_url(path)
         end
       end
 
