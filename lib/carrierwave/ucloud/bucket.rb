@@ -57,8 +57,8 @@ module CarrierWave
           req.headers['Authorization'] = authorization(req.method, nil, path)
         end
 
-        logger.info '-' * 100
-        logger.info response
+        Rails.logger.info '-' * 100
+        Rails.logger.info response
 
         if response.success?
           true
