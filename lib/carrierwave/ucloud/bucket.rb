@@ -55,6 +55,7 @@ module CarrierWave
         path.sub!(PATH_PREFIX, '')
         response = conn.delete(URI.escape url(path)) do |req|
           req.headers['Authorization'] = authorization(req.method, nil, path)
+          Rails.logger.info req.inspect
         end
 
         if response.success?
